@@ -1,92 +1,95 @@
 [
   {
-    "student": "Sanani Zeynalli",
-    "course": "Calculus",
-    "grade": 53.03
+    "exam": {
+      "course": "Calculus"
+    },
+    "students": [
+      {
+        "student": "Sanani Zeynalli",
+        "grade": 96.32
+      },
+      {
+        "student": "Javid Nazarov",
+        "grade": 74.0
+      },
+      {
+        "student": "Seyfulla Mehdiyev",
+        "grade": 96.43
+      },
+      {
+        "student": "Farid Mehtiyev",
+        "grade": 71.73
+      },
+      {
+        "student": "Xagani Zeynalli",
+        "grade": 76.53
+      },
+      {
+        "student": "Keml Godgivers",
+        "grade": 93.6
+      }
+    ]
   },
   {
-    "student": "Sanani Zeynalli",
-    "course": "Network",
-    "grade": 39.33
+    "exam": {
+      "course": "Network"
+    },
+    "students": [
+      {
+        "student": "Sanani Zeynalli",
+        "grade": 70.4
+      },
+      {
+        "student": "Javid Nazarov",
+        "grade": 83.21
+      },
+      {
+        "student": "Seyfulla Mehdiyev",
+        "grade": 89.85
+      },
+      {
+        "student": "Farid Mehtiyev",
+        "grade": 74.97
+      },
+      {
+        "student": "Xagani Zeynalli",
+        "grade": 95.29
+      },
+      {
+        "student": "Keml Godgivers",
+        "grade": 91.65
+      }
+    ]
   },
   {
-    "student": "Sanani Zeynalli",
-    "course": "Computer Science",
-    "grade": 78.18
-  },
-  {
-    "student": "Javid Nazarov",
-    "course": "Calculus",
-    "grade": 59.56
-  },
-  {
-    "student": "Javid Nazarov",
-    "course": "Network",
-    "grade": 74.57
-  },
-  {
-    "student": "Javid Nazarov",
-    "course": "Computer Science",
-    "grade": 93.82
-  },
-  {
-    "student": "Seyfulla Mehdiyev",
-    "course": "Calculus",
-    "grade": 71.13
-  },
-  {
-    "student": "Seyfulla Mehdiyev",
-    "course": "Network",
-    "grade": 71.54
-  },
-  {
-    "student": "Seyfulla Mehdiyev",
-    "course": "Computer Science",
-    "grade": 78.33
-  },
-  {
-    "student": "Farid Mehtiyev",
-    "course": "Calculus",
-    "grade": 87.56
-  },
-  {
-    "student": "Farid Mehtiyev",
-    "course": "Network",
-    "grade": 34.9
-  },
-  {
-    "student": "Farid Mehtiyev",
-    "course": "Computer Science",
-    "grade": 86.0
-  },
-  {
-    "student": "Xagani Zeynalli",
-    "course": "Calculus",
-    "grade": 75.77
-  },
-  {
-    "student": "Xagani Zeynalli",
-    "course": "Network",
-    "grade": 59.84
-  },
-  {
-    "student": "Xagani Zeynalli",
-    "course": "Computer Science",
-    "grade": 79.39
-  },
-  {
-    "student": "Keml Godgivers",
-    "course": "Calculus",
-    "grade": 96.12
-  },
-  {
-    "student": "Keml Godgivers",
-    "course": "Network",
-    "grade": 78.96
-  },
-  {
-    "student": "Keml Godgivers",
-    "course": "Computer Science",
-    "grade": 95.48
+    "exam": {
+      "course": "Computer Science"
+    },
+    "students": [
+      {
+        "student": "Sanani Zeynalli",
+        "grade": 84.94
+      },
+      {
+        "student": "Javid Nazarov",
+        "grade": 96.67
+      },
+      {
+        "student": "Seyfulla Mehdiyev",
+        "grade": 84.85
+      },
+      {
+        "student": "Farid Mehtiyev",
+        "grade": 99.45
+      },
+      {
+        "student": "Xagani Zeynalli",
+        "grade": 95.53
+      },
+      {
+        "student": "Keml Godgivers",
+        "grade": 57.18
+      }
+    ]
   }
 ]

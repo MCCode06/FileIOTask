@@ -15,6 +15,7 @@ public class Exam implements Gradable{
         while (grade < 70){
             grade = new Random().nextDouble() * 100;
         }
+        grade = (double) Math.round(grade * 100) / 100;
         System.out.println(student.getFirstName() + ' ' + student.getLastName() + " is graded for course -> " + course.getName() + ": " + grade);
         return grade;
     }
@@ -25,6 +26,7 @@ public class Exam implements Gradable{
         while (grade > 60 || grade < 30) {
             grade = new Random().nextDouble() * 100;
         }
+        grade = (double) Math.round(grade * 100) / 100;
         System.out.println(student.getFirstName() + ' ' + student.getLastName() + " is graded for course by the Alvin method -> " + course.getName() + ": " + grade);
         return grade;
     }

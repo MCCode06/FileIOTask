@@ -175,25 +175,43 @@ public class Main {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("exams.json"))) {
 
             writer.write("[\n");
-            for (Student student : students) {
-                for (Course course : student.getCourses()) {
-                    writer.write("  {\n");
-                    writer.write("    \"student\": \"" + student.getFirstName() + " " + student.getLastName() + "\",\n");
-                    writer.write("    \"course\": \"" + course.getName() + "\",\n");
-                    writer.write("    \"grade\": " + student.getGrades().get(course) + "\n");
-                    writer.write("  }");
-                    if (student.getCourses().indexOf(course) < student.getCourses().size() - 1 || students.indexOf(student) < students.size() - 1) {
-                        writer.write(",");
-                    }
-                    writer.write("\n");
-                }
-            }
+            for (int i = 0; i < courses.size(); i++) {
+                Course course = courses.get(i);
+                writer.write("  {\n");
+                writer.write("    \"exam\": {\n");
+                writer.write("      \"course\": \"" + course.getName() + "\"\n");
+                writer.write("    },\n");
 
+
+                writer.write("    \"students\": [\n");
+                for (int j = 0; j < students.size(); j++) {
+                    Student student = students.get(j);
+                    if (student.getCourses().contains(course)) {
+                        writer.write("      {\n");
+                        writer.write("        \"student\": \"" + student.getFirstName() + " " + student.getLastName() + "\",\n");
+                        writer.write("        \"grade\": " + student.getGrades().get(course) + "\n");
+                        writer.write("      }");
+
+                        if (j < students.size() - 1) {
+                            writer.write(",");
+                        }
+                        writer.write("\n");
+                    }
+                }
+                writer.write("    ]\n");
+                writer.write("  }");
+
+                if (i < courses.size() - 1) {
+                    writer.write(",");
+                }
+                writer.write("\n");
+            }
             writer.write("]\n");
-        }
-        catch (IOException e) {
+
+        } catch (IOException e) {
             System.out.println("An error occurred while writing to exams.json: " + e.getMessage());
         }
     }
+
 
 }
