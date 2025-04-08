@@ -1,0 +1,150 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+
+public abstract class Human {
+    protected String firstName;
+    protected String lastName;
+    protected int age;
+    protected String gender;
+
+    public Human(String firstName, String lastName, int age, String gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.gender = gender;
+
+    }
+
+ public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public abstract void whoami();
+}
+
+
+
+import java.util.*;
+
+public class Student extends Human {
+    private List<Course> courses;
+    private Map<Course, Double> grades;
+
+    public Student(String firstName, String lastName, int age, String gender) {
+        super(firstName, lastName, age, gender);
+        this.courses = new ArrayList<>();
+        this.grades = new HashMap<>();
+    }
+
+    public void enroll(Course course) {
+        courses.add(course);
+    }
+
+    public void addGrade(Course course, double grade) {
+        grades.put(course, grade);
+    }
+	
+
+    @Override
+    public void whoami() {
+        System.out.println("I am student: " + firstName + ' ' + lastName);
+    }
+}
+
+
+import java.util.*;
+
+public class Teacher extends Human implements Teacherable {
+    private List<Course> courses;
+
+    public Teacher(String firstName, String lastName, int age, String gender) {
+        super(firstName, lastName, age, gender);
+        this.courses = new ArrayList<>();
+    }
+
+    @Override
+    public void canTeach(Course course) {
+        courses.add(course);
+        System.out.println(firstName + ' ' + lastName + " is teaching " + course.getName());
+    }
+
+    @Override
+    public void whoami() {
+        System.out.println("I am teacher " + firstName + ' ' + lastName);
+    }
+}
+
+
+public class Course {
+    private String name;
+    private Teacher teacher;
+
+    public Course(String name, Teacher teacher) {
+        this.name = name;
+        this.teacher = teacher;
+    }
+
+    public void makeExam(Student student) {
+        Exam exam = new Exam(student, this);
+        double grade = exam.evaluate();
+        student.addGrade(this, grade);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+}
+
+
+
+import java.util.Random;
+
+public class Exam implements Gradable{
+    private Student student;
+    private Course course;
+
+    public Exam(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
+
+    public double evaluate() {
+        double grade = new Random().nextDouble() * 100;
+        System.out.println("Grading " + student.firstName + ' ' + student.lastName + " for course " + course.getName() + ": " + grade);
+        return grade;
+    }
+
+@Override
+    public double alvinEvaluates(){
+        double grade = new Random().nextDouble() * 100;
+        while (grade > 60 || grade < 30) {
+            grade = new Random().nextDouble() * 100;
+        }
+        System.out.println(student.firstName + ' ' + student.lastName + " is graded for course by the Alvin" + course.getName() + ": " + grade);
+        return grade;
+    }
+}
+
+
+public interface Teacherable {
+    void canTeach(Course course);
+}
+
+public interface Gradable {
+    double evaluate();
+
+    double alvinEvaluates();
+}
+
+
