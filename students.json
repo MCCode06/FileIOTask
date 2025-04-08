@@ -1,0 +1,98 @@
+[
+  {
+    "firstName": "Sanani",
+    "lastName": "Zeynalli",
+    "age": 19,
+    "gender": "Male",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 39.33,
+      "Computer Science": 78.18,
+      "Calculus": 53.03
+    }
+  },
+  {
+    "firstName": "Javid",
+    "lastName": "Nazarov",
+    "age": 19,
+    "gender": "Male",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 74.57,
+      "Computer Science": 93.82,
+      "Calculus": 59.56
+    }
+  },
+  {
+    "firstName": "Seyfulla",
+    "lastName": "Mehdiyev",
+    "age": 19,
+    "gender": "Male",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 71.54,
+      "Computer Science": 78.33,
+      "Calculus": 71.13
+    }
+  },
+  {
+    "firstName": "Farid",
+    "lastName": "Mehtiyev",
+    "age": 19,
+    "gender": "Non-binary",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 34.9,
+      "Computer Science": 86.0,
+      "Calculus": 87.56
+    }
+  },
+  {
+    "firstName": "Xagani",
+    "lastName": "Zeynalli",
+    "age": 20,
+    "gender": "Male",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 59.84,
+      "Computer Science": 79.39,
+      "Calculus": 75.77
+    }
+  },
+  {
+    "firstName": "Keml",
+    "lastName": "Godgivers",
+    "age": 21,
+    "gender": "Male",
+    "courses": [
+      "Calculus",
+      "Network",
+      "Computer Science"
+    ],
+    "grades": {
+      "Network": 78.96,
+      "Computer Science": 95.48,
+      "Calculus": 96.12
+    }
+  }
+]

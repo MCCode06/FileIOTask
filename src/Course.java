@@ -9,7 +9,11 @@ public class Course {
         this.teacher = teacher;
     }
 
+
     public void makeExam(Student student) {
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null.");
+        }
         Exam exam = new Exam(student, this);
         double grade;
 
@@ -17,13 +21,13 @@ public class Course {
         int dice = rand.nextInt(6) + 1;
         if (dice == 6) {
             grade = exam.alvinEvaluates();
-        }
-        else {
+        } else {
             grade = exam.evaluate();
         }
-        grade = (double) (Math.round(grade * 100)) / 100; // learned from gpt
+        grade = (double) (Math.round(grade * 100)) / 100; // rounding
         student.addGrade(this, grade);
     }
+
 
     public String getName() {
         return name;

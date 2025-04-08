@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "Khanum",
+    "lastName": "Jafarova",
+    "age": 45,
+    "gender": "Female",
+    "courses": [
+      "Calculus"
+    ]
+  },
+  {
+    "firstName": "Asim",
+    "lastName": "Namazov",
+    "age": 39,
+    "gender": "Male",
+    "courses": [
+      "Network"
+    ]
+  }
+]

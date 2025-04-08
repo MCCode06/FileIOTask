@@ -8,10 +8,21 @@ public class Teacher extends Human implements Teacherable {
         this.courses = new ArrayList<>();
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
     @Override
     public void canTeach(Course course) {
-        courses.add(course);
-        System.out.println(firstName + ' ' + lastName + " is teaching " + course.getName());
+        if (course == null) {
+            throw new IllegalArgumentException("Course cannot be null.");
+        }
+        if (courses.contains(course)) {
+            System.out.println(firstName + ' ' + lastName + " is already teaching " + course.getName());
+        } else {
+            courses.add(course);
+            System.out.println(firstName + ' ' + lastName + " is teaching " + course.getName());
+        }
     }
 
     @Override

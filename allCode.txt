@@ -1,8 +1,55 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        // Teachers
+        Teacher teacher1 = new Teacher("Khanum", "Jafarova", 35, "Female");
+        Teacher teacher2 = new Teacher("Asim", "Namazov", 42, "Male");
+
+        // Courses
+        Course calc = new Course("Calculus", teacher1);
+        Course netw = new Course("Network", teacher2);
+        teacher1.canTeach(calc);
+        teacher2.canTeach(netw);
+
+        List<Course> availableCourses = Arrays.asList(calc, netw);
+
+        // Students
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("Sanani", "Zeynalli", 19, "Male"));
+        students.add(new Student("Javid", "Nazarov", 19, "Male"));
+        students.add(new Student("Seyfulla", "Mehdiyev", 19, "Male"));
+        students.add(new Student("Farid", "Mehtiyev", 19, "Non-binary"));
+        students.add(new Student("Xagani", "Zeynalli", 20, "Male"));
+
+
+        for (Student student : students) {
+            System.out.println("--- " + student.firstName + " " + student.lastName + " ---");
+            for (int i = 0; i < 2; i++) {
+                Course course = availableCourses.get(i);
+                student.enroll(course);
+                course.makeExam(student);
+            }
+            System.out.println('\n');
+        }
+
+        System.out.println('\n');
+        System.out.println("====== STUDENT GRADES ======");
+        for (Student student : students) {
+            System.out.println("Grades for " + student.firstName + " " + student.lastName + ":");
+            for (Course course : availableCourses) {
+                Double grade = student.getGrades().get(course);
+                if (grade != null) {
+                    System.out.println(course.getName() + ": " + grade);
+                }
+            }
+            System.out.println('\n');
+        }
     }
 }
+
+
+import java.util.*;
 
 public abstract class Human {
     protected String firstName;
@@ -18,7 +65,7 @@ public abstract class Human {
 
     }
 
- public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -28,7 +75,6 @@ public abstract class Human {
 
     public abstract void whoami();
 }
-
 
 
 import java.util.*;
@@ -50,15 +96,20 @@ public class Student extends Human {
     public void addGrade(Course course, double grade) {
         grades.put(course, grade);
     }
-	
+
+    public Map<Course, Double> getGrades() {
+        return grades;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
 
     @Override
     public void whoami() {
         System.out.println("I am student: " + firstName + ' ' + lastName);
     }
 }
-
-
 import java.util.*;
 
 public class Teacher extends Human implements Teacherable {
@@ -81,6 +132,7 @@ public class Teacher extends Human implements Teacherable {
     }
 }
 
+import java.util.*;
 
 public class Course {
     private String name;
@@ -93,7 +145,17 @@ public class Course {
 
     public void makeExam(Student student) {
         Exam exam = new Exam(student, this);
-        double grade = exam.evaluate();
+        double grade;
+
+        Random rand = new Random();
+        int dice = rand.nextInt(6) + 1;
+        if (dice == 6) {
+            grade = exam.alvinEvaluates();
+        }
+        else {
+            grade = exam.evaluate();
+        }
+        grade = (double) (Math.round(grade * 100)) / 100; // learned from gpt
         student.addGrade(this, grade);
     }
 
@@ -105,10 +167,7 @@ public class Course {
         return teacher;
     }
 }
-
-
-
-import java.util.Random;
+import java.util.*;
 
 public class Exam implements Gradable{
     private Student student;
@@ -119,19 +178,23 @@ public class Exam implements Gradable{
         this.course = course;
     }
 
+    @Override
     public double evaluate() {
         double grade = new Random().nextDouble() * 100;
-        System.out.println("Grading " + student.firstName + ' ' + student.lastName + " for course " + course.getName() + ": " + grade);
+        while (grade < 70){
+            grade = new Random().nextDouble() * 100;
+        }
+        System.out.println(student.getFirstName() + ' ' + student.getLastName() + " is graded for course -> " + course.getName() + ": " + grade);
         return grade;
     }
 
-@Override
+    @Override
     public double alvinEvaluates(){
         double grade = new Random().nextDouble() * 100;
         while (grade > 60 || grade < 30) {
             grade = new Random().nextDouble() * 100;
         }
-        System.out.println(student.firstName + ' ' + student.lastName + " is graded for course by the Alvin" + course.getName() + ": " + grade);
+        System.out.println(student.getFirstName() + ' ' + student.getLastName() + " is graded for course by the Alvin method -> " + course.getName() + ": " + grade);
         return grade;
     }
 }
@@ -140,11 +203,91 @@ public class Exam implements Gradable{
 public interface Teacherable {
     void canTeach(Course course);
 }
-
 public interface Gradable {
     double evaluate();
 
     double alvinEvaluates();
 }
+
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+public class FileSaver {
+
+    private static final ObjectMapper mapper = new ObjectMapper()
+            .enable(SerializationFeature.INDENT_OUTPUT);
+
+    public static <T> void saveToJson(List<T> data, String filename) {
+        try {
+            mapper.writeValue(new File(filename), data);
+            System.out.println("Saved data to " + filename);
+        } catch (IOException e) {
+            System.err.println("Failed to save data to " + filename);
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+public class ExamResult {
+    private String studentFirstName;
+    private String studentLastName;
+    private String courseName;
+    private double grade;
+
+    public ExamResult(String studentFirstName, String studentLastName, String courseName, double grade) {
+        this.studentFirstName = studentFirstName;
+        this.studentLastName = studentLastName;
+        this.courseName = courseName;
+        this.grade = grade;
+    }
+
+    // Required: Jackson needs a default constructor
+    public ExamResult() {
+    }
+
+    // Getters and setters
+    public String getStudentFirstName() {
+        return studentFirstName;
+    }
+
+    public void setStudentFirstName(String studentFirstName) {
+        this.studentFirstName = studentFirstName;
+    }
+
+    public String getStudentLastName() {
+        return studentLastName;
+    }
+
+    public void setStudentLastName(String studentLastName) {
+        this.studentLastName = studentLastName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public double getGrade() {
+        return grade;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+}
+
+
+
 
 
